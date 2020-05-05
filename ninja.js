@@ -17,7 +17,7 @@ class Ninja {
     }
 }
 class Sensei extends Ninja{
-    constructor(name) {
+    constructor(name, wisdom) {
         super(name)
         this.wisdom = 10;
         this.strength = 5;
@@ -26,14 +26,11 @@ class Sensei extends Ninja{
     }
 
 
-    // senseiStats() {
-    //     const message = super.showStats();
-    //     console.log(message `wisdom ${wisdom}`);
-    // }
 
     speakWisdom() {
         let x = Math.floor((Math.random() * 6));
         const speak = ["What one programmer can do in one month, two programmers can do in two months.", "The drunken Sensei Master always knows what code to write, therefore, he writes no code.", "the way of the ninja warrior leads to the way of the ninja warrior", "not all who code are smart", "the master of code understands all paths to null"];
+        console.log(`Sensei wisdom is: ${this.wisdom}`);
         console.log(speak[x]);
     }
 }
@@ -48,4 +45,4 @@ const superSensei = new Sensei("Master Splinter");
 superSensei.showStats();
 superSensei.speakWisdom();
 
-console.log(Sensei.wisdom);
+console.log(superSensei.wisdom);
