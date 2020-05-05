@@ -1,3 +1,5 @@
+//basic hoisting exercises to (re)familiarize myself with scope
+
 //1
 console.log(hello);
 var hello = 'world';

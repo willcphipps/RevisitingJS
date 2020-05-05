@@ -6,7 +6,7 @@ class Card {
     }
 }
 
-class Unit extends Card {
+class NinjaCard extends Card {
     constructor(name,cost,power,res){
         super(name,cost);
         this.power = power;
@@ -17,7 +17,7 @@ class Unit extends Card {
     }
 
     attack(target) {
-        if( target instanceof Unit ) {
+        if( target instanceof NinjaCard ) {
             target.res -= this.power;
         } else {
             throw new Error( "Target must be a unit!" );
@@ -25,7 +25,7 @@ class Unit extends Card {
     }
 }
 
-class Effect extends Card {
+class PoseQuestion extends Card {
     constructor(name, cost, text, stat, magnitude){
         super(name,cost);
         this.text = text;
@@ -33,7 +33,7 @@ class Effect extends Card {
         this.magnitude = magnitude;
     }
     play(target) {
-        if (target instanceof Unit) {
+        if (target instanceof NinjaCard) {
             this.stat == "res" ? target.res += this.magnitude : target.power += this.magnitude;
         }
         else {
@@ -41,17 +41,23 @@ class Effect extends Card {
         }
     }
 }
-const p1 = new Unit("Red Belt Ninja",3,3,4);
-const p2 = new Unit("Black Belt Ninja", 4, 5, 4);
+const p1 = new NinjaCard("Red Belt Ninja",3,3,4);
+const p2 = new NinjaCard("Black Belt Ninja", 4, 5, 4);
 
-const e1= new Effect("Hard Algorithm",2,"increase target res by 3", "res", 3);
-const e2 = new Effect("Unhandled Promise Rejection", 1, "reduce target's resilience by 2", "res" , -2);
-const e3 = new Effect("Pair Programming", 3, "increase target's power by 2", "power", 2);
+const e1= new PoseQuestion("Hard Algorithm",2,"increase target res by 3", "res", 3);
+const e2 = new PoseQuestion("Unhandled Promise Rejection", 1, "reduce target's resilience by 2", "res" , -2);
+const e3 = new PoseQuestion("Pair Programming", 3, "increase target's power by 2", "power", 2);
 
 
-const player1 = "disgruntled student";
-const player2 = "overacheier";
-console.log(player1, " summons ", p1.name);
 p1.showStat();
 e1.play(p1);
 p1.showStat(); 
+p2.showStat();
+e2.play(p1);
+p1.showStat(); 
+p2.showStat();
+e3.play(p1);
+p1.attack(p2);
+
+p1.showStat(); 
+p2.showStat();
